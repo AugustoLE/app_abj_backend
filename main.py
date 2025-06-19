@@ -18,7 +18,8 @@ app.add_middleware(
 )
 
 # Conexión a MongoDB Atlas
-MONGO_URI = os.getenv("MONGO_URI", "mongodb+srv://cessenati:xpv604NPuoflyjaO@databasegus.aafystp.mongodb.net/colegio_games?retryWrites=true&w=majority&tls=true&tlsAllowInvalidCertificates=true")
+MONGO_URI = os.getenv("MONGO_URI", 
+                      "mongodb+srv://cessenati:xpv604NPuoflyjaO@databasegus.aafystp.mongodb.net/?retryWrites=true&w=majority&appName=databasegus")
 client = MongoClient(MONGO_URI)
 db = client["colegio_games"]
 users_collection = db["usuarios"]
