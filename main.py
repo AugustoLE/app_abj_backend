@@ -7,26 +7,28 @@ from bson import ObjectId
 import os
 from dotenv import load_dotenv
 
+# Cargar variables de entorno
 load_dotenv()
 
+# Crear la app FastAPI
 app = FastAPI()
 
-# CORS
+# Configurar CORS (ajusta los dominios si es necesario)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["*"],  # En producción, usar dominios específicos
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# Conexión MongoDB (asíncrona)
+# Conexión a MongoDB Atlas
 MONGO_URI = os.getenv("MONGO_URI", "mongodb+srv://cessenati:xpv604NPuoflyjaO@databasegus.aafystp.mongodb.net/?retryWrites=true&w=majority&appName=databasegus")
 client = AsyncIOMotorClient(MONGO_URI)
 db = client["colegio_games"]
 users_collection = db["usuarios"]
 
-# Modelos
+# Modelos de datos
 class Usuario(BaseModel):
     parentName: str
     parentLastName: str
@@ -40,7 +42,7 @@ class LoginInput(BaseModel):
     email: EmailStr
     password: str
 
-# Helper
+# Helper para convertir documentos BSON a dict JSON serializable
 def usuario_dict(doc):
     return {
         "id": str(doc["_id"]),
@@ -52,7 +54,7 @@ def usuario_dict(doc):
         "courses": doc["courses"],
     }
 
-# Rutas asíncronas
+# Rutas
 @app.get("/")
 async def root():
     return {"message": "Backend funcionando con motor"}

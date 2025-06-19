@@ -1,8 +1,5 @@
 fastapi
 uvicorn
-pydantic
-pydantic[email]
-pymongo
 motor
 python-dotenv
-requests
+pydantic
