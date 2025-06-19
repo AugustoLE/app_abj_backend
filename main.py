@@ -23,7 +23,7 @@ app.add_middleware(
 )
 
 # Conexión a MongoDB Atlas
-MONGO_URI = os.getenv("MONGO_URI", "mongodb+srv://cessenati:xpv604NPuoflyjaO@databasegus.aafystp.mongodb.net/?retryWrites=true&w=majority&appName=databasegus")
+MONGO_URI = os.getenv("MONGO_URI", "mongodb+srv://cessenati:xpv604NPuoflyjaO@databasegus.aafystp.mongodb.net/?retryWrites=true&w=majority&appName=databasegus&tls=true")
 client = AsyncIOMotorClient(MONGO_URI)
 db = client["colegio_games"]
 users_collection = db["usuarios"]
