@@ -1,0 +1,54 @@
+# Archivos de Python
+*.pyc
+__pycache__/
+.Python
+env/
+venv/
+pip-log.txt
+pip-delete-this-directory.txt
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.mypy_cache/
+.pytype/
+.ipynb_checkpoints
+notebooks/.ipynb_checkpoints
+
+# Archivos de sistema operativo
+.DS_Store
+.env
+.idea/
+
+# Archivos de bases de datos
+*.sqlite3
+*.db
+/database.db
+
+# Logs
+*.log
+
+# Archivos específicos de FastAPI/Uvicorn
+/uvicorn.pid
+/.pytest_cache/
+
+# Dependencias (si las instalas en el directorio del proyecto en lugar de un entorno virtual)
+# lib/
+# include/
+
+# Archivos de PyInstaller/cx_Freeze (si los usas)
+# build/
+# dist/
+# *.spec
+
+# Archivos generados por Sphinx (si usas documentación)
+# docs/_build/
+
+# Archivos de Docker
+# .dockerignore
+
+# Archivos de VS Code
+.vscode/
+
+# Archivos de configuración de variables de entorno
+.env
