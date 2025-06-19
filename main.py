@@ -3,30 +3,34 @@ from pydantic import BaseModel, EmailStr
 from typing import List
 from fastapi.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
-import os
 from dotenv import load_dotenv
+import os
 
-# Cargar variables de entorno
+# Cargar variables de entorno desde .env
 load_dotenv()
 
-# Crear la app FastAPI
+# Crear instancia FastAPI
 app = FastAPI()
 
-# Configurar CORS (ajusta los dominios si es necesario)
+# Configurar CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # En producción, usar dominios específicos
+    allow_origins=["*"],  # En producción, reemplazar con dominios permitidos
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# Conexión a MongoDB Atlas
-client = AsyncIOMotorClient(os.getenv("MONGO_URI", "mongodb+srv://cessenati:xpv604NPuoflyjaO@databasegus.aafystp.mongodb.net/?retryWrites=true&w=majority&appName=databasegus"))
+# Conexión a MongoDB Atlas usando .env
+MONGO_URI = os.getenv("MONGO_URI")
+if not MONGO_URI:
+    raise RuntimeError("Falta definir MONGO_URI en el archivo .env")
+
+client = AsyncIOMotorClient(MONGO_URI)
 db = client["colegio_games"]
 users_collection = db["usuarios"]
 
-# Modelos de datos
+# Modelos
 class Usuario(BaseModel):
     parentName: str
     parentLastName: str
@@ -40,7 +44,7 @@ class LoginInput(BaseModel):
     email: EmailStr
     password: str
 
-# Helper para convertir documentos BSON a dict JSON serializable
+# Convertidor BSON a dict JSON serializable
 def usuario_dict(doc):
     return {
         "id": str(doc["_id"]),
@@ -89,8 +93,9 @@ async def update_user(email: str, updated_data: dict):
     user = await users_collection.find_one({"parentEmail": email})
     if not user:
         raise HTTPException(status_code=404, detail="Usuario no encontrado")
-
-    update_fields = {field: updated_data[field] for field in ["parentName", "parentLastName", "childName", "childLastName", "courses"] if field in updated_data}
+    
+    fields = ["parentName", "parentLastName", "childName", "childLastName", "courses"]
+    update_fields = {field: updated_data[field] for field in fields if field in updated_data}
     await users_collection.update_one({"parentEmail": email}, {"$set": update_fields})
     updated_user = await users_collection.find_one({"parentEmail": email})
     return usuario_dict(updated_user)
