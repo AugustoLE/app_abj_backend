@@ -3,7 +3,6 @@ from pydantic import BaseModel, EmailStr
 from typing import List
 from fastapi.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
-from bson import ObjectId
 import os
 from dotenv import load_dotenv
 
@@ -23,8 +22,7 @@ app.add_middleware(
 )
 
 # Conexión a MongoDB Atlas
-MONGO_URI = os.getenv("MONGO_URI", "mongodb+srv://cessenati:xpv604NPuoflyjaO@databasegus.aafystp.mongodb.net/?retryWrites=true&w=majority&appName=databasegus&tls=true")
-client = AsyncIOMotorClient(MONGO_URI)
+client = AsyncIOMotorClient(os.getenv("MONGO_URI", "mongodb+srv://cessenati:xpv604NPuoflyjaO@databasegus.aafystp.mongodb.net/?retryWrites=true&w=majority&appName=databasegus"))
 db = client["colegio_games"]
 users_collection = db["usuarios"]
 
