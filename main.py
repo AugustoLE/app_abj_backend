@@ -91,3 +91,7 @@ def update_user(email: str, updated_data: dict):
     users_collection.update_one({"parentEmail": email}, {"$set": update_fields})
     updated_user = users_collection.find_one({"parentEmail": email})
     return usuario_dict(updated_user)
+
+@app.get("/")
+def root():
+    return {"message": "Backend funcionando correctamente"}
