@@ -50,4 +50,3 @@ notebooks/.ipynb_checkpoints
 .vscode/
 
 # Archivos de configuración de variables de entorno
-.env
