@@ -17,7 +17,6 @@ notebooks/.ipynb_checkpoints
 
 # Archivos de sistema operativo
 .DS_Store
-.env
 .idea/
 
 # Archivos de bases de datos
