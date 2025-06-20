@@ -4,3 +4,4 @@ motor
 pydantic
 pydantic[email]
 python-dotenv
+pymongo
