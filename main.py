@@ -5,8 +5,10 @@ from routes import user  # importa tu router
 app = FastAPI()
 
 origins = [
-    "http://localhost:50991",
-    "https://app-abj-backend.onrender.com",
+    "http://localhost:51749",   # tu frontend local
+    "http://localhost:5173",    # otro posible puerto común de Flutter
+    "https://app-abj-frontend.web.app",  # si luego usas hosting
+    "https://app-abj-backend.onrender.com",  # opcional: para permitir fetch interno
 ]
 
 app.add_middleware(
