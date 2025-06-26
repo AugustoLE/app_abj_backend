@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from routes import user  # importa tu router
+from routes import user, game, ml
 
 app = FastAPI()
 
@@ -11,8 +11,8 @@ origins = [
 
 app.add_middleware(
     CORSMiddleware,
-    #allow_origins=origins,
-    allow_origins=["*"],
+    allow_origins=origins,
+    #allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -20,3 +20,9 @@ app.add_middleware(
 
 # Incluir rutas
 app.include_router(user.router)
+app.include_router(game.router)
+app.include_router(ml.router)
+
+@app.get("/")
+async def root():
+    return {"message": "Servidor backend con ML funcionando"}

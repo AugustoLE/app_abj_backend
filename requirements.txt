@@ -5,3 +5,6 @@ pydantic
 pydantic[email]
 python-dotenv
 pymongo
+pandas
+scikit-learn 
+joblib

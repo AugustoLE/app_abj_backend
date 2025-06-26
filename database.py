@@ -8,4 +8,9 @@ MONGO_URI = os.getenv("MONGO_URI")
 
 client = AsyncIOMotorClient(MONGO_URI)
 db = client["colegio_games"]
-users_collection = db["usuarios"]  # Recomendado: cambiar el nombre a users_collection
+
+# Colección de usuarios
+users_collection = db["usuarios"]
+
+# Colección de juegos
+juegos_collection = db["juegos"]

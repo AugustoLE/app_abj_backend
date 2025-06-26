@@ -1,20 +1,9 @@
 from fastapi import APIRouter, HTTPException
-from pydantic import EmailStr
-from typing import List
-
 from models import Usuario, LoginInput
 from database import users_collection
 from schemas import usuario_dict
 
 router = APIRouter()
-
-@router.get("/")
-async def root():
-    return {"message": "Backend funcionando con motor"}
-
-@router.get("/users/health")
-async def health():
-    return {"status": "ok"}
 
 @router.post("/register", status_code=201)
 async def register_user(user: Usuario):
