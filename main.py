@@ -5,6 +5,8 @@ from routes import user, game, ml
 app = FastAPI()
 
 origins = [
+    "http://localhost:50441",
+    "http://127.0.0.1:50441",
     "https://app-abj-render.onrender.com",  # si luego usas hosting
     "https://app-abj-backend.onrender.com",  # opcional: para permitir fetch interno
 ]
